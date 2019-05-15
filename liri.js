@@ -4,6 +4,8 @@ require("dotenv").config();
 var keys = require("./keys.js");
 var axios = require("axios");
 var Spotify = require("node-spotify-api");
+var spotify = new Spotify(keys.spotify);
+
 var moment = require("moment");
 moment().format();
 
@@ -30,7 +32,24 @@ function bandsLog(event, index) {
     console.log("\n*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*\n\n");
 };
 
-// spotify logger to be used in a forEach call
+// code for spotify items
+function spotifyLog(item) {
+    // display artists
+    var artists = [];
+    item.artists.forEach(function (artist) {
+        artists.push(artist.name);
+    });
+    var artistList = artists.join(", ");
+    if (artists.length > 1) {
+        console.log(`Artists: ${artistList}\n`);
+    } else {
+        console.log(`Artist: ${artistList}\n`);
+    }
+    console.log(`Song Name: ${item.name}\n`);
+    console.log(`Preview URL: ${item.preview_url}\n`);
+    console.log(`Album Name: ${item.album.name}\n`);
+    console.log(`======================================\n\n`);
+}
 
 // code for inquirer to see what the user is trying to do
 var inquirer = require('inquirer');
@@ -57,7 +76,7 @@ inquirer
             var url = `https://rest.bandsintown.com/artists/${searchTerm}/events?app_id=codingbootcamp`;
             axios.get(url)
                 .then(function(response) {
-                    // print required information to console 
+                    // print required information to console for each event
                     response.data.forEach(bandsLog);
                 })
                 .catch(function (error) {
@@ -65,7 +84,19 @@ inquirer
                   });
         } else if (searchType.includes("song") || searchType.includes("spotify")) {
             // spotify code here
-            console.log("you searched spotify!");
+            if (searchTerm === "") {
+                searchTerm = "The Sign Ace of Base";
+            }
+            console.log(`\n\nI will search Spotify for the song: ${searchTerm}`);
+            spotify
+                .search({ type: 'track', query: searchTerm })
+                .then(function (response) {
+                    console.log(`\n\n========== ${searchTerm} info =======\n`);
+                    response.tracks.items.forEach(spotifyLog);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
 
         } else if (searchType.includes("movie")) {
             // OMDB code here
