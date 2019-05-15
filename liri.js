@@ -18,9 +18,18 @@ spotify-this-song
 movie-this
 do-what-it-says
 
+####### I'm turning these into prompts using inquirer ##########
+
 */
 
-// functions
+// prompt arrays (any of the words and phrases will work in each API call)
+
+var bandsTerms = ["concert-this", "concert", "bands in town", "concerts", "bands-in-town"];
+var spotifyTerms = ["spotify-this-song", "spotify", "song search", "search songs", "songs", "tracks", "song-search", "search-songs", "song"];
+var movieTerms = ["movie-this", "movies", "movie", "movie ratings", "movie-ratings", "OMDB", "OMDB search", "OMDB-search"];
+var doWhatItSays = ["do-what-it-says", "do what it says", "do it", "do it!", "what's in random.txt?", "random", ""];
+
+// ========================================= functions ===========================================
 
 // bands in town logger to be used in a forEach call
 function bandsLog(event, index) {
@@ -70,8 +79,7 @@ inquirer
         var searchType = answers.search.trim().toLowerCase();
         var searchTerm = answers.term.trim().toLowerCase();
         // all the code for searching goes in here!
-        if (searchType.includes("concert")) {
-            // bands in town search code
+        if (bandsTerms.includes(searchType)) { // bands in town search
             console.log(`\n\nI will search Bands In Town for upcoming ${searchTerm} concerts....`);
             var url = `https://rest.bandsintown.com/artists/${searchTerm}/events?app_id=codingbootcamp`;
             axios.get(url)
@@ -82,8 +90,7 @@ inquirer
                 .catch(function (error) {
                     console.log(error);
                   });
-        } else if (searchType.includes("song") || searchType.includes("spotify")) {
-            // spotify code here
+        } else if (spotifyTerms.includes(searchType)) { // spotify search
             if (searchTerm === "") {
                 searchTerm = "The Sign Ace of Base";
             }
@@ -98,11 +105,10 @@ inquirer
                     console.log(err);
                 });
 
-        } else if (searchType.includes("movie")) {
-            // OMDB code here
+        } else if (movieTerms.includes(searchType)) { // OMDB search
             console.log("you searched OMDB!");
 
-        } else if (searchType.includes("do what it says")) {
+        } else if (doWhatItSays.includes(searchType)) { // do what it says search
             // random text function
             console.log("you searched random text!");
 
