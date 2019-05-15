@@ -9,6 +9,8 @@ var spotify = new Spotify(keys.spotify);
 var moment = require("moment");
 moment().format();
 
+var imdbKey = keys.omdbKey.key;
+
 /* 
 
 ###### arguments #######
@@ -58,9 +60,42 @@ function spotifyLog(item) {
     console.log(`Preview URL: ${item.preview_url}\n`);
     console.log(`Album Name: ${item.album.name}\n`);
     console.log(`======================================\n\n`);
+};
+
+// code for OMDB items
+/*
+   * Title of the movie.
+   * Year the movie came out.
+   * IMDB Rating of the movie.
+   * Rotten Tomatoes Rating of the movie.
+   * Country where the movie was produced.
+   * Language of the movie.
+   * Plot of the movie.
+   * Actors in the movie.
+
+*/
+function imdbLog(response) {
+    var movie = response.data;
+    var imdbRating = movie.Ratings.forEach(function(rating) {
+        if (rating.Source === "Internet Movie Database") {
+            return rating.Value;
+        } else {
+            return "Not Rated By IMDB";
+        }
+    });
+    var rottenTomatoesRating = movie.Ratings.forEach(function(rating) {
+        if (rating.Source === "Rotten Tomatoes") {
+            return rating.Value;
+        } else {
+            return "Not Rated By Rotten Tomatoes";
+        }
+    });
+    console.log("\n\n*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*\n");
+    console.log(`Movie Title: ${movie.Title}\nRelease Year: ${movie.Year}\nIMDB Rating: ${imdbRating}\nRotten Tomatoes Rating: ${rottenTomatoesRating}\nProduction Country: ${movie.Country}\nLanguage: ${movie.Language}\nPlot Summary: ${movie.Plot}\nList of Actors: ${movie.Actors}`);
+    console.log("\n*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*\n\n");
 }
 
-// code for inquirer to see what the user is trying to do
+// ======================= code for inquirer and axios calls ==========================
 var inquirer = require('inquirer');
 
 inquirer
@@ -81,8 +116,8 @@ inquirer
         // all the code for searching goes in here!
         if (bandsTerms.includes(searchType)) { // bands in town search
             console.log(`\n\nI will search Bands In Town for upcoming ${searchTerm} concerts....`);
-            var url = `https://rest.bandsintown.com/artists/${searchTerm}/events?app_id=codingbootcamp`;
-            axios.get(url)
+            var bandsUrl = `https://rest.bandsintown.com/artists/${searchTerm}/events?app_id=codingbootcamp`;
+            axios.get(bandsUrl)
                 .then(function(response) {
                     // print required information to console for each event
                     response.data.forEach(bandsLog);
@@ -94,7 +129,7 @@ inquirer
             if (searchTerm === "") {
                 searchTerm = "The Sign Ace of Base";
             }
-            console.log(`\n\nI will search Spotify for the song: ${searchTerm}`);
+            console.log(`\n\nI will search Spotify for the song: ${searchTerm}.`);
             spotify
                 .search({ type: 'track', query: searchTerm })
                 .then(function (response) {
@@ -106,7 +141,19 @@ inquirer
                 });
 
         } else if (movieTerms.includes(searchType)) { // OMDB search
-            console.log("you searched OMDB!");
+            if (searchTerm === "") {
+                searchTerm = "mr nobody";
+            }
+            var movieUrl = `https://www.omdbapi.com/?apikey=${imdbKey}&t=${searchTerm}&type=movie`
+            console.log(`\n\nI will search OMDB for the movie ${searchTerm}.`);
+            axios.get(movieUrl)
+            .then(function(response) {
+                // print required information to console for each event
+                imdbLog(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+              });
 
         } else if (doWhatItSays.includes(searchType)) { // do what it says search
             // random text function
