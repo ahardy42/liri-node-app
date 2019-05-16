@@ -101,10 +101,23 @@ inquirer
             name: "term",
             default: "term",
             when: function (answers) {
-                return !doWhatItSays.includes(answers.search);
+                // if do-what-it-says is called, you don't need a search term. 
+                return !doWhatItSays.includes(answers.search); 
             }
         }
     ]).then(function (answers) {
+        // first, create a log file if it's not there already, and append the search type and term
+        var logTextArray = [];
+        var answersTimeStamp = moment().format('MMMM Do YYYY, h:mm:ss a') + "\n";
+        var answersText = JSON.stringify(answers, null, 2) + "\n";
+        var separatorText = "*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n";
+        logTextArray.push(answersTimeStamp, answersText, separatorText);
+        fs.appendFile("./log.txt", logTextArray.join(""), function(err, data) {
+            if (err) {
+                console.log(err);
+            }
+            console.log("Log Updated");
+        });
         var searchType = answers.search.trim().toLowerCase();
         if (answers.term === undefined) {
             searchTerm = "term";
