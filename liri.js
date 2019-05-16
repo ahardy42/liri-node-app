@@ -1,6 +1,7 @@
 // this allows the program to use the .env file to get keys
 require("dotenv").config();
 
+var fs = require("fs");
 var keys = require("./keys.js");
 var axios = require("axios");
 var Spotify = require("node-spotify-api");
@@ -157,7 +158,7 @@ inquirer
 
         } else if (doWhatItSays.includes(searchType)) { // do what it says search
             // random text function
-            console.log("you searched random text!");
+            
 
         } else {
             console.log("\nI'm sorry, I am a simple program, developed by a simple human...\nYou have typed a search term that I don't understand.\nHave a nice day!");
