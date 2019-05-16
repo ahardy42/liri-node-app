@@ -64,27 +64,16 @@ function spotifyLog(item) {
 };
 
 // code for OMDB items
-/*
-   * Title of the movie.
-   * Year the movie came out.
-   * IMDB Rating of the movie.
-   * Rotten Tomatoes Rating of the movie.
-   * Country where the movie was produced.
-   * Language of the movie.
-   * Plot of the movie.
-   * Actors in the movie.
-
-*/
 function imdbLog(response) {
     var movie = response.data;
-    var imdbRating = movie.Ratings.forEach(function(rating) {
+    var imdbRating = movie.Ratings.forEach(function (rating) {
         if (rating.Source === "Internet Movie Database") {
             return rating.Value;
         } else {
             return "Not Rated By IMDB";
         }
     });
-    var rottenTomatoesRating = movie.Ratings.forEach(function(rating) {
+    var rottenTomatoesRating = movie.Ratings.forEach(function (rating) {
         if (rating.Source === "Rotten Tomatoes") {
             return rating.Value;
         } else {
@@ -109,23 +98,42 @@ inquirer
         {
             type: "input",
             message: "Excellent, Please enter your search term",
-            name: "term"
+            name: "term",
+            default: "term",
+            when: function (answers) {
+                return !doWhatItSays.includes(answers.search);
+            }
         }
-    ]).then(function(answers) {
+    ]).then(function (answers) {
         var searchType = answers.search.trim().toLowerCase();
-        var searchTerm = answers.term.trim().toLowerCase();
-        // all the code for searching goes in here!
+        if (answers.term === undefined) {
+            searchTerm = "term";
+        } else {
+            var searchTerm = answers.term.trim().toLowerCase();
+        }
+        console.log("search type is", searchType);
+        console.log("search term is", searchTerm);
+        console.log("it's " + doWhatItSays.includes(searchType));
+        // do what it says code
+        if (doWhatItSays.includes(searchType)) { // do what it says search
+            // random text function
+            var data = fs.readFileSync("./random.txt", "utf8"); // sync version of readFile
+            var dataArray = data.split(",");
+            searchType = dataArray[0];
+            searchTerm = dataArray[1];
+        }
+        // all the code for searching APIs goes in here!
         if (bandsTerms.includes(searchType)) { // bands in town search
             console.log(`\n\nI will search Bands In Town for upcoming ${searchTerm} concerts....`);
             var bandsUrl = `https://rest.bandsintown.com/artists/${searchTerm}/events?app_id=codingbootcamp`;
             axios.get(bandsUrl)
-                .then(function(response) {
+                .then(function (response) {
                     // print required information to console for each event
                     response.data.forEach(bandsLog);
                 })
                 .catch(function (error) {
                     console.log(error);
-                  });
+                });
         } else if (spotifyTerms.includes(searchType)) { // spotify search
             if (searchTerm === "") {
                 searchTerm = "The Sign Ace of Base";
@@ -148,17 +156,13 @@ inquirer
             var movieUrl = `https://www.omdbapi.com/?apikey=${imdbKey}&t=${searchTerm}&type=movie`
             console.log(`\n\nI will search OMDB for the movie ${searchTerm}.`);
             axios.get(movieUrl)
-            .then(function(response) {
-                // print required information to console for each event
-                imdbLog(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-              });
-
-        } else if (doWhatItSays.includes(searchType)) { // do what it says search
-            // random text function
-            
+                .then(function (response) {
+                    // print required information to console for each event
+                    imdbLog(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
         } else {
             console.log("\nI'm sorry, I am a simple program, developed by a simple human...\nYou have typed a search term that I don't understand.\nHave a nice day!");
