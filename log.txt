@@ -49,3 +49,17 @@ API Searched: Spotify API
 Search Type Input: spotify-this-song
 Search Term Input: "Comfortably Numb"
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+May 17th 2019, 8:24:57 pm
+
+API Searched: OMDB API
+Search Type Input: movie
+Search Term Input: fargo
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+May 17th 2019, 8:29:01 pm
+
+API Searched: OMDB API
+Search Type Input: movie
+Search Term Input: fargo
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*

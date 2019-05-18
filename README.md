@@ -5,7 +5,7 @@
 - LIRI is a language interpretation and recognition interface console app.  
 - LIRI will search Spotify for songs, Bands in Town for concerts, and OMDB for movies.
 
-## How To Use
+## How To Set Up on Your Computer
 
 1. First, you need to fork this repo and clone it to a folder of your choosing!
 
@@ -14,9 +14,22 @@
     * OMDB [API key](http://omdbapi.com/)
     * Bands In Town [API key](http://www.artists.bandsintown.com/bandsintown-api)
 
-3. You will need to create a .env file which references these keys:
+3. You will need to create a .env file which references these keys like so:
 
-># Spotify API keys
+```
+# Spotify API keys
 
->SPOTIFY_ID=<your ID>
->SPOTIFY_SECRET=<your Secret>
+SPOTIFY_ID=<your ID>
+SPOTIFY_SECRET=<your Secret>
+```
+4. You are now ready to use Liri in your terminal or bash!
+
+## How To Use
+
+1. Type ``` node liri.js ``` into your console
+
+2. Enter your search type / term into the console...
+
+    * First, we will run a spotify search
+
+    ![spotify search](https://gph.is/g/ZYAx09p)
