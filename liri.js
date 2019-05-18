@@ -51,7 +51,6 @@ inquirer
             type: "input",
             message: "Excellent, Please enter your search term",
             name: "term",
-            default: "term",
             when: function (answers) {
                 // if do-what-it-says is called, you don't need a search term. 
                 return !doWhatItSays.includes(answers.search);
@@ -64,10 +63,7 @@ inquirer
         } else {
             var searchTerm = answers.term.trim().toLowerCase();
         }
-        var searchUsed = searchUsedFunc(searchType);
-        console.log("searched API is", searchUsed);
-        console.log("search type is", searchType);
-        console.log("search term is", searchTerm);
+        searchUsed = searchUsedFunc(searchType);
         // do what it says code
         if (doWhatItSays.includes(searchType)) { // do what it says search
             // random text function
@@ -78,7 +74,7 @@ inquirer
             searchUsed = searchUsedFunc(searchType);
         }
         // update the search log asynchronously
-        logPrint(searchType);
+        logPrint(searchUsed, searchType, searchTerm);
         // all the code for searching APIs goes in here!
         if (bandsTerms.includes(searchType)) { // bands in town search
             console.log(`\n\nI will search Bands In Town for upcoming ${searchTerm} concerts....`);
@@ -130,35 +126,29 @@ inquirer
 
 // searchUsed function
 function searchUsedFunc(type) {
-    switch (type) {
-        case bandsTerms.includes(type):
-            return "Bands In Town API";
-            break;
-        case spotifyTerms.includes(type):
-            return "Spotify API";
-            break;
-        case movieTerms.includes(type):
-            return "OMDB API";
-            break;
-        case doWhatItSays.includes(type):
-            return "Using random.txt to search";
-            break;
-        default:
-            return "Invalid Input";
+    if (bandsTerms.includes(type)) {
+        return "Bands In Town API";
+    } else if (spotifyTerms.includes(type)) {
+        return "Spotify API";
+    } else if (movieTerms.includes(type)) {
+        return "OMDB API";
+    } else if (doWhatItSays.includes(type)) {
+        return "Using random.txt to search";
+    } else {
+        return "Invalid Input";
     }
 }
 
 // logging information on search
-function logPrint() {
+function logPrint(used, type, term) {
     // first, create a log file if it's not there already, and append the search type and term
     var answersTimeStamp = moment().format('MMMM Do YYYY, h:mm:ss a') + "\n";
-    var separatorText = "*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n";
-    var logText = `\n\n${separatorText}\n\n${answersTimeStamp}\nAPI Searched: ${searchUsed}\nSearch Type Input: ${searchType}\nSearch Term Input: ${searchTerm}\n\n${separatorText}\n\n`;
-    fs.appendFile("./log.txt", logText, function (err, data) {
+    var separatorText = "*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*";
+    var logText = `${separatorText}\n${answersTimeStamp}\nAPI Searched: ${used}\nSearch Type Input: ${type}\nSearch Term Input: ${term}\n${separatorText}\n`;
+    fs.appendFile("./log.txt", logText, function (err) {
         if (err) {
             console.log(err);
         }
-        console.log(`Log Updated With ${data}`);
     });
 }
 

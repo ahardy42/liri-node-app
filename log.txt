@@ -1,14 +1,51 @@
-
-
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
+May 17th 2019, 7:38:39 pm
 
-May 17th 2019, 7:09:35 am
-
-API Searched: undefined
-Search Type Input: undefined
-Search Term Input: undefined
-
+API Searched: OMDB API
+Search Type Input: movie
+Search Term Input: fargo
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+May 17th 2019, 7:40:04 pm
 
+API Searched: Spotify API
+Search Type Input: spotify-this-song
+Search Term Input: "I Want it That Way"
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+May 17th 2019, 7:43:18 pm
+
+API Searched: Spotify API
+Search Type Input: spotify-this-song
+Search Term Input: "I Want it That Way"
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+May 17th 2019, 7:44:09 pm
+
+API Searched: OMDB API
+Search Type Input: movie
+Search Term Input: fargo
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+May 17th 2019, 7:44:26 pm
+
+API Searched: Spotify API
+Search Type Input: song
+Search Term Input: take it to the limit
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+May 17th 2019, 7:49:07 pm
+
+API Searched: Spotify API
+Search Type Input: song
+Search Term Input: walk this way
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+May 17th 2019, 7:54:01 pm
+
+API Searched: Spotify API
+Search Type Input: spotify-this-song
+Search Term Input: "Comfortably Numb"
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
