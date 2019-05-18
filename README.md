@@ -33,3 +33,17 @@ SPOTIFY_SECRET=<your Secret>
     * First, we will run a spotify search
 
     ![spotify search](https://media.giphy.com/media/toYIiutyeYgfPvYg76/giphy.gif)
+    
+3. Much like SIRI, the LIRI app will take a list of search terms for each API call. Here are accepted terms:
+
+```javascript
+var bandsTerms = ["concert-this", "concert", "bands in town", "concerts", "bands-in-town"];
+var spotifyTerms = ["spotify-this-song", "spotify", "song search", "search songs", "songs", "tracks", "song-search", "search-songs", "song"];
+var movieTerms = ["movie-this", "movies", "movie", "movie ratings", "movie-ratings", "OMDB", "OMDB search", "OMDB-search"];
+var doWhatItSays = ["do-what-it-says", "do what it says", "do it", "do it!", "what's in random.txt?", "random", ""];
+```
+
+4. Each API call produces slightly different results.
+
+   * Spotify Search Example: 
+   
