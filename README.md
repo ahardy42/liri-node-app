@@ -32,4 +32,4 @@ SPOTIFY_SECRET=<your Secret>
 
     * First, we will run a spotify search
 
-    ![spotify search](https://media.giphy.com/media/NlWZnRsDTnPBZqPjlZ/giphy.gif)
+    ![spotify search](https://media.giphy.com/media/toYIiutyeYgfPvYg76/giphy.gif)
