@@ -30,9 +30,9 @@ SPOTIFY_SECRET=<your Secret>
 
 2. Enter your search type / term into the console...
 
-    * First, we will run a spotify search
+    * First, we will run a OMDB search
 
-    ![spotify search](https://media.giphy.com/media/toYIiutyeYgfPvYg76/giphy.gif)
+    ![OMDB search](https://media.giphy.com/media/toYIiutyeYgfPvYg76/giphy.gif)
     
 3. Much like SIRI, the LIRI app will take a list of search terms for each API call. Here are accepted terms:
 
@@ -46,4 +46,26 @@ var doWhatItSays = ["do-what-it-says", "do what it says", "do it", "do it!", "wh
 4. Each API call produces slightly different results.
 
    * Spotify Search Example: 
+   ![Spotify Search](https://media.giphy.com/media/vgwdltDPFU0JL6EGqX/giphy.gif)
    
+   * Bands in Town Search Example:
+   ![Bands in Town Search](https://media.giphy.com/media/8qx5bVX40YRcNrqD9C/giphy.gif)
+   
+   
+5. There is also a search that pulls from a text file called ```random.txt``` that dictates the search to be used using prompts from the ```javascript var doWhatItSays``` variable. 
+
+![Do What It Says](https://media.giphy.com/media/1jbaPvNCSDgaZSNh3t/giphy.gif)
+
+## Log File
+
+- If you notice from the GIF above, each search will update a log file ```log.txt``` with the type, terms and time of each search
+
+
+## Search Errors
+
+- the GIF below shows the result of using a term not stored in the program ```"search song"``` instead of ```song search``` will return an error message.
+
+![error](https://media.giphy.com/media/fQivMafHlm5VkqEaNz/giphy.gif)
+
+
+### ENJOY!
